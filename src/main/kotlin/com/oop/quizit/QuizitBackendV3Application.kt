@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import java.util.*
 import javax.annotation.PostConstruct
 
+
 @SpringBootApplication
 @EntityScan(basePackageClasses = [QuizitBackendV3Application::class, Jsr310JpaConverters::class])
 class QuizitBackendV3Application(val roleRepository: RoleRepository, val userRepository: UserRepository, val passwordEncoder: PasswordEncoder){
