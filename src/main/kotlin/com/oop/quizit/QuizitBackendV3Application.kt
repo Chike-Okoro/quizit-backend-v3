@@ -1,7 +1,9 @@
 package com.oop.quizit
 
+import com.oop.quizit.model.QuizRoom
 import com.oop.quizit.model.Role
 import com.oop.quizit.model.User
+import com.oop.quizit.repository.QuizRoomRepository
 import com.oop.quizit.repository.RoleRepository
 import com.oop.quizit.repository.UserRepository
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -9,13 +11,14 @@ import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.boot.runApplication
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters
 import org.springframework.security.crypto.password.PasswordEncoder
+import java.time.LocalDate
 import java.util.*
 import javax.annotation.PostConstruct
 
 
 @SpringBootApplication
 @EntityScan(basePackageClasses = [QuizitBackendV3Application::class, Jsr310JpaConverters::class])
-class QuizitBackendV3Application(val roleRepository: RoleRepository, val userRepository: UserRepository, val passwordEncoder: PasswordEncoder){
+class QuizitBackendV3Application(val roleRepository: RoleRepository, val userRepository: UserRepository, val quizRoomRepository: QuizRoomRepository, val passwordEncoder: PasswordEncoder){
 
     @PostConstruct
     fun init() = TimeZone.setDefault(TimeZone.getTimeZone("UTC"))
@@ -55,6 +58,22 @@ class QuizitBackendV3Application(val roleRepository: RoleRepository, val userRep
 
             user.roles = roles
             userRepository.save(user)
+        }
+
+        if(!quizRoomRepository.existsByName("Demo Quiz Room")){
+            val quizRoom = QuizRoom().apply {
+                name = "Demo Quiz Room"
+                description = "Demo Quiz Room Description"
+                dateCreated = LocalDate.now()
+            }
+
+            quizRoom.code = "quiz22"
+
+            val user = userRepository.findByUsername("admin22")
+
+            quizRoom.adminId = user
+
+            quizRoomRepository.save(quizRoom)
         }
 
     }

@@ -1,8 +1,6 @@
 package com.oop.quizit.service
 
-import com.oop.quizit.repository.MockQuizRoomRepository
 import com.oop.quizit.repository.QuizRoomRepository
-import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Assertions.*

@@ -3,6 +3,7 @@ package com.oop.quizit.model
 import lombok.AllArgsConstructor
 import lombok.Data
 import lombok.NoArgsConstructor
+import org.jetbrains.annotations.NotNull
 import java.time.LocalDate
 import javax.persistence.*
 
@@ -15,11 +16,11 @@ data class QuizRoom(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     val quizRoomId: Long? = null,
-    val name: String? = null,
+    var name: String? = null,
     @Column(unique = true)
-    val code: String? = null,
-    val dateCreated: LocalDate? = null,
-    val description: String? = null,
+    var code: String? = null,
+    var dateCreated: LocalDate? = null,
+    var description: String? = null,
     @ManyToOne
     var adminId: User? = null
 )

@@ -1,4 +1,4 @@
-package com.group.quizit.controller
+package com.oop.quizit.controller
 
 import com.oop.quizit.exception.AppException
 import com.oop.quizit.model.User
@@ -30,7 +30,6 @@ class AuthController(
     val passwordEncoder: PasswordEncoder,
     val tokenProvider: TokenProvider
 ) {
-    // once again: this is just a tutorial from callicoder.com, do not try this at home
     @PostMapping("/sign-up")
     fun registerUser(@Valid @RequestBody req: SignUpRequest): CreateUserResponse {
         if (userRepository.existsByUsername(req.username)) {
