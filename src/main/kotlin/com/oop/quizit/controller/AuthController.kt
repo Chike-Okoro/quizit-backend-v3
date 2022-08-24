@@ -58,6 +58,34 @@ class AuthController(
         return CreateUserResponse(HttpStatus.CREATED.name, "User created successfully")
     }
 
+    @PostMapping("/admin/sign-up")
+    fun registerAdminUser(@Valid @RequestBody req: SignUpRequest): CreateUserResponse {
+        if (userRepository.existsByUsername(req.username)) {
+            return CreateUserResponse(HttpStatus.BAD_REQUEST.name, "Username is already taken")
+        }
+
+
+        // Creating user account
+        val user = User().apply {
+            firstName = req.firstName
+            lastName = req.lastName
+            username = req.username
+            password = req.password
+        }
+
+        user.password = passwordEncoder.encode(user.password)
+
+        val userRole = roleRepository.findByName("ADMIN") ?: throw AppException("User role is not set")
+
+        user.roles = mutableSetOf(userRole)
+
+        userRepository.save(user)
+
+
+
+        return CreateUserResponse(HttpStatus.CREATED.name, "User created successfully")
+    }
+
     @PostMapping("/login")
     fun authenticateUser(@Valid @RequestBody loginRequest: LoginRequest): ResponseEntity<*> {
 

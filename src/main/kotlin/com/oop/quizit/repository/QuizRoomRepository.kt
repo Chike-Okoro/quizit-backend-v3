@@ -13,4 +13,6 @@ interface QuizRoomRepository : JpaRepository<QuizRoom, Long>{
     fun findAllByAdminId(adminId: User) : List<QuizRoom>
 
     fun existsByName(name: String) : Boolean
+
+    fun findByName(name: String) : QuizRoom
 }

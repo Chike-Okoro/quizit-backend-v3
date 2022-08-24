@@ -1,7 +1,9 @@
 package com.oop.quizit.service
 
 import com.oop.quizit.exception.BadRequestException
+import com.oop.quizit.exception.NameNotFoundException
 import com.oop.quizit.model.QuizRoom
+import com.oop.quizit.model.User
 import com.oop.quizit.repository.QuizRoomRepository
 import com.oop.quizit.repository.UserRepository
 import com.oop.quizit.request.CreateQuizRoomRequest
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
 import java.util.*
+import kotlin.collections.List
 
 @Service
 @Transactional
@@ -71,5 +74,22 @@ class QuizRoomService(val repository: QuizRoomRepository, val userRepository: Us
 
         return code
     }
+
+ //   fun getQuizRooms(adminId: User): List<QuizRoom>{}
+/*
+    fun getQuizRoomByName(name: String?) : QuizRoom{
+        val quizRoom = QuizRoom()
+        if(name == null){
+            throw NameNotFoundException("Could not find $name in Quiz room")
+        }
+        else{
+            repository.findByName(name)
+            return quizRoom
+        }
+    }
+
+    fun getQuizRoomById(adminId: User): List<QuizRoom> = repository.findAllByAdminId(adminId)
+*/
+
 
 }

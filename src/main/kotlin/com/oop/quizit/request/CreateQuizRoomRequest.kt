@@ -8,3 +8,10 @@ class CreateQuizRoomRequest {
      val name: @NotBlank String? = null
      val description: @NotBlank String? = null
 }
+
+/*
+class GetQuizRoomRequest{
+     val name: @NotBlank String? = null
+
+}
+*/
